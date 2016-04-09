@@ -34,7 +34,7 @@ namespace AtlasTexturePacker.Library
         public BitmapExtended(string fileName)
         {
             _bitmap = new Bitmap(fileName);
-            Name = Path.GetFileNameWithoutExtention(fileName);
+            Name = Path.GetFileNameWithoutExtension(fileName);
         }
         
         public BitmapExtended(string fileName, string imageName)
