@@ -12,6 +12,7 @@ namespace AtlasTexturePacker.Library
     public class AtlasCreator
     {
         public static int AtlasSize = 1024;
+        public static string ImageRegex = "[\\.png|\\.jpg|\\.jpeg$]"
 
         public class AtlasNode
         {
@@ -320,10 +321,45 @@ namespace AtlasTexturePacker.Library
 
             return result.ToArray();
         }
+        
+        	
 
         public static void QuickCreate(string inputDir, string outputDir, int maxSize = 1024, bool recursive = true)
         {
+        	string[] images = Directory.GetFiles( inputDir ).Where(x => Regex.IsMatch(x.ToLower(), ImageRegex)).ToArray();
+        	
+        	string atlasName = Path.GetFullPath(inputDir).SubString(inputDir.LastIndexOf(Path.DirectorySeporatorChar));
+        	
+        	BitmapExtended[] textures = images.Select(x => new BitmapExtended(x)).ToArray();
+        	
+        	if(recursive)
+        	{
+        		string[] subDirs = Path.GetDirectories(inputDir);
+        		for(int i = 0; i < subDirs.Length; ++i)
+        			textures.AddRange(LoadImagesR(subDirs[i], inputDir));
+        	}
+        	
+        	AtlasCreator.Atlas[] atlases = AtlasCreator.CreateAtlas(atlasName, textures);
 
+            for(int i = 0; i < atlases.Length; ++i)
+            {
+                AtlasCreator.SaveAtlas(atlases[i], atlasName + i.ToString());
+            }
+        }
+        
+        private static BitmapExtended[] LoadImagesR(string inputDir, string rootDir)
+        {
+        	string[] images = Directory.GetFiles( inputDir ).Where(x => Regex.IsMatch(x.ToLower(), ImageRegex)).ToArray();
+        	
+        	string subDirName = rootDir.Replace(inputDir, "");
+        	
+        	BitmapExtended[] textures = images.Select(x => new BitmapExtended(x, subDirName + Path.GetFileNameWithoutExtention(x))).ToArray();
+        	
+        	string[] subDirs = Path.GetDirectories(inputDir);
+        		for(int i = 0; i < subDirs.Length; ++i)
+        			textures.AddRange(LoadImagesR(subDirs[i], inputDir));
+        			
+        	return textures;
         }
     }
 }

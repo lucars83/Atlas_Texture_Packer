@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -33,7 +34,13 @@ namespace AtlasTexturePacker.Library
         public BitmapExtended(string fileName)
         {
             _bitmap = new Bitmap(fileName);
-            Name = fileName;
+            Name = Path.GetFileNameWithoutExtention(fileName);
+        }
+        
+        public BitmapExtended(string fileName, string imageName)
+        {
+        	_bitmap = new Bitmap(fileName);
+        	Name = imageName;
         }
 
         public BitmapExtended(int width, int height)
