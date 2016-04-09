@@ -13,7 +13,7 @@ namespace AtlasTexturePacker.Library
     public class AtlasCreator
     {
         public static int AtlasSize = 1024;
-        public static string ImageRegex = "[\\.png|\\.jpg|\\.jpeg$]";
+        public static string ImageRegex = "[\\.png|\\.jpg|\\.jpeg]$";
 
         public class AtlasNode
         {

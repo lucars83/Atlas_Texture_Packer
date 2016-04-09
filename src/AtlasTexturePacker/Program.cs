@@ -15,23 +15,11 @@ namespace AtlasTexturePacker.CLI
     {
         static void Main(string[] args)
         {
-            /*
-            string[] images = Directory.GetFiles( Directory.GetCurrentDirectory() ).Where(x => Regex.IsMatch(x.ToLower(), "\\.png$")).ToArray();
-
-            BitmapExtended[] textures = images.Select(x => new BitmapExtended(x)).ToArray();
-
-            //AtlasCreator.Atlas[] atlases = AtlasCreator.CreateAtlas("PlayerGuard", textures);
-
-            for(int i = 0; i < atlases.Length; ++i)
-            {
-                //AtlasCreator.SaveAtlas(atlases[i], "Name" + i.ToString());
-            }
-            */
             AtlasArguments arguments = new AtlasArguments();
             
             if (CommandLine.Parser.Default.ParseArguments(args, arguments))
             {
-                int i = 0;
+                AtlasCreator.QuickCreate(arguments.InputPath, arguments.OutputPath, arguments.Size, arguments.Recursive);
             }
         }
     }
