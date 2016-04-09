@@ -8,6 +8,7 @@ using AtlasTexturePacker.Library;
 using System.Text.RegularExpressions;
 using System.Drawing;
 
+
 namespace AtlasTexturePacker.CLI
 {
     class Program

@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Drawing;
+using System.Text.RegularExpressions;
 
 namespace AtlasTexturePacker.Library
 {
@@ -12,7 +13,7 @@ namespace AtlasTexturePacker.Library
     public class AtlasCreator
     {
         public static int AtlasSize = 1024;
-        public static string ImageRegex = "[\\.png|\\.jpg|\\.jpeg$]"
+        public static string ImageRegex = "[\\.png|\\.jpg|\\.jpeg$]";
 
         public class AtlasNode
         {
@@ -232,7 +233,7 @@ namespace AtlasTexturePacker.Library
             if (atlas == null || atlas.texture == null)
                 return;
 
-            string path = Path.Combine(directory, name + ".png");
+            string path = directory + name + ".png";
 
             atlas.texture.Save(path, System.Drawing.Imaging.ImageFormat.Png);
         }
@@ -245,6 +246,8 @@ namespace AtlasTexturePacker.Library
         public static Atlas[] CreateAtlas(string name, BitmapExtended[] textures, Atlas startWith = null)
         {
             // Rotate images
+            for (int i = 0; i < textures.Length; ++i)
+                textures[i].RotateFlip(RotateFlipType.Rotate90FlipNone);
 
             List<BitmapExtended> toProcess = new List<BitmapExtended>();
             toProcess.AddRange(textures);
@@ -328,22 +331,22 @@ namespace AtlasTexturePacker.Library
         {
         	string[] images = Directory.GetFiles( inputDir ).Where(x => Regex.IsMatch(x.ToLower(), ImageRegex)).ToArray();
         	
-        	string atlasName = Path.GetFullPath(inputDir).SubString(inputDir.LastIndexOf(Path.DirectorySeporatorChar));
+        	string atlasName = Path.GetFullPath(inputDir).Substring(inputDir.LastIndexOf(Path.DirectorySeparatorChar));
         	
         	BitmapExtended[] textures = images.Select(x => new BitmapExtended(x)).ToArray();
         	
         	if(recursive)
         	{
-        		string[] subDirs = Path.GetDirectories(inputDir);
-        		for(int i = 0; i < subDirs.Length; ++i)
-        			textures.AddRange(LoadImagesR(subDirs[i], inputDir));
+        		string[] subDirs = Directory.GetDirectories(inputDir);
+                for (int i = 0; i < subDirs.Length; ++i)
+                    textures = textures.Concat(LoadImagesR(subDirs[i], inputDir)).ToArray();
         	}
         	
         	AtlasCreator.Atlas[] atlases = AtlasCreator.CreateAtlas(atlasName, textures);
 
             for(int i = 0; i < atlases.Length; ++i)
             {
-                AtlasCreator.SaveAtlas(atlases[i], atlasName + i.ToString());
+                AtlasCreator.SaveAtlas(atlases[i], outputDir, atlasName + i.ToString());
             }
         }
         
@@ -353,11 +356,11 @@ namespace AtlasTexturePacker.Library
         	
         	string subDirName = rootDir.Replace(inputDir, "");
         	
-        	BitmapExtended[] textures = images.Select(x => new BitmapExtended(x, subDirName + Path.GetFileNameWithoutExtention(x))).ToArray();
+        	BitmapExtended[] textures = images.Select(x => new BitmapExtended(x, subDirName + Path.GetFileNameWithoutExtension(x))).ToArray();
         	
-        	string[] subDirs = Path.GetDirectories(inputDir);
+        	string[] subDirs = Directory.GetDirectories(inputDir);
         		for(int i = 0; i < subDirs.Length; ++i)
-        			textures.AddRange(LoadImagesR(subDirs[i], inputDir));
+        			textures = textures.Concat(LoadImagesR(subDirs[i], inputDir)).ToArray();
         			
         	return textures;
         }
