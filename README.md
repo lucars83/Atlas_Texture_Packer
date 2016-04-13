@@ -5,8 +5,11 @@ This is a library/command line utility for creating texture atlases
 
 ## Todo
 
+* Get index
 * Trim unused atlas
-* Libgdx Atlas output
+* Type option
 
+## bugs
 
+* N\A
 
