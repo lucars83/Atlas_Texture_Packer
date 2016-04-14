@@ -15,7 +15,7 @@ namespace AtlasTexturePacker.Library
         public static int AtlasSize = 1024;
         public static string ImageRegex = "[\\.png|\\.jpg|\\.jpeg]$";
 
-        public class AtlasNode
+        public partial class AtlasNode
         {
             public AtlasNode[] child = null;
             public Rect rc = new Rect(0, 0, 0, 0);
@@ -284,6 +284,7 @@ namespace AtlasTexturePacker.Library
 
             foreach (Atlas atlas in result)
             {
+                atlas.root.Trim(ref atlas.texture);
                 atlas.root.Build(atlas.texture);
                 List<AtlasNode> nodes = new List<AtlasNode>();
                 atlas.root.GetBounds(ref nodes);
@@ -338,7 +339,9 @@ namespace AtlasTexturePacker.Library
                 for (int i = 0; i < subDirs.Length; ++i)
                     textures = textures.Concat(LoadImagesR(subDirs[i], inputDir)).ToArray();
         	}
-        	
+
+            AtlasCreator.AtlasSize = maxSize;
+
         	AtlasCreator.Atlas[] atlases = AtlasCreator.CreateAtlas(atlasName, textures);
             Dictionary<string, Atlas> atlasesWithNames = new Dictionary<string, Atlas>();
 

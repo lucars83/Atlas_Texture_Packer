@@ -5,8 +5,9 @@ This is a library/command line utility for creating texture atlases
 
 ## Todo
 
-* Get index
-* Trim unused atlas
+* Grunt script
+* Nuget package
+* package.json
 * Type option
 
 ## bugs
