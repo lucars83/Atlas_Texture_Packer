@@ -42,6 +42,7 @@
   <ItemGroup>
     <Compile Include="AtlasCreator.cs" />
     <Compile Include="AtlasCreatorDescriptors.cs" />
+    <Compile Include="AtlasCreatorTrim.cs" />
     <Compile Include="BitmapExtended.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Rect.cs" />
