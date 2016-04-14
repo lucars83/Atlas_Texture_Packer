@@ -9,6 +9,7 @@ This is a library/command line utility for creating texture atlases
 * Nuget package
 * package.json
 * Type option
+* None type
 
 ## bugs
 
