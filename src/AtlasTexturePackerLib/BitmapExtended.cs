@@ -75,7 +75,15 @@ namespace AtlasTexturePacker.Library
 
         public void Save(string path, System.Drawing.Imaging.ImageFormat format)
         {
-            _bitmap.Save(path, format);
+            try
+            {
+                _bitmap.Save(path, format);
+            }
+            catch(Exception ex)
+            {
+                throw new IOException("Could not save image");
+            }
+            
         }
     }
 }

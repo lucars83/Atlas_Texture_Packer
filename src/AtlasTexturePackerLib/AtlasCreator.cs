@@ -325,6 +325,7 @@ namespace AtlasTexturePacker.Library
 
         public static void QuickCreate(string inputDir, string outputDir, int maxSize = 1024, bool recursive = true, AtlasFormat format = AtlasFormat.NONE)
         {
+            Console.WriteLine("Loading images");
         	string[] images = Directory.GetFiles( inputDir ).Where(x => Regex.IsMatch(x.ToLower(), ImageRegex)).ToArray();
         	
         	string atlasName = Path.GetFullPath(inputDir).Substring(inputDir.LastIndexOf(Path.DirectorySeparatorChar) + 1);
@@ -340,9 +341,11 @@ namespace AtlasTexturePacker.Library
 
             AtlasCreator.AtlasSize = maxSize;
 
+            Console.WriteLine("Creating Atlas");
         	AtlasCreator.Atlas[] atlases = AtlasCreator.CreateAtlas(atlasName, textures);
             Dictionary<string, Atlas> atlasesWithNames = new Dictionary<string, Atlas>();
 
+            Console.WriteLine("Saving Atlas");
             for(int i = 0; i < atlases.Length; ++i)
             {
                 // build name
@@ -351,9 +354,9 @@ namespace AtlasTexturePacker.Library
                 atlasesWithNames.Add(sheetName, atlases[i]);
 
                 // create atlas
+                AtlasCreator.SaveAtlas(atlases[i], outputDir, sheetName);
 
                 // create descriptor
-                AtlasCreator.SaveAtlas(atlases[i], outputDir, sheetName);
                 SaveAtlasFile(atlasesWithNames, outputDir, format);
             }
         }

@@ -58,11 +58,10 @@ Install the library via nuget or by referencing the dll.
 
 ### QuickCreate
 
-### Stlas Creator
+### Atlas Creator
 
 ## Todo
 
-* Size is power of two
 * Documentation
 
 ## bugs
