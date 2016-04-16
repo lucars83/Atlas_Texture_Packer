@@ -22,6 +22,9 @@ namespace AtlasTexturePacker.CLI
         [Option('s', "size", Required = false, HelpText = "The maximum size of the generated texture pack", DefaultValue = 1024)]
         public int Size { get; set; }
 
+        [Option('f', "format", Required = false, HelpText = "The format to save the atlas description as. Valid values are 'Libgdx' and 'None'", DefaultValue = "Libgdx")]
+        public string format { get; set; }
+
         [HelpOption]
         public string GetUsage()
         {

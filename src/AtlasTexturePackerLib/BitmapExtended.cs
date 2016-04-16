@@ -34,7 +34,7 @@ namespace AtlasTexturePacker.Library
         public BitmapExtended(string fileName)
         {
             _bitmap = new Bitmap(fileName);
-            Name = Path.GetFileNameWithoutExtention(fileName);
+            Name = Path.GetFileNameWithoutExtension(fileName);
         }
         
         public BitmapExtended(string fileName, string imageName)
@@ -75,7 +75,15 @@ namespace AtlasTexturePacker.Library
 
         public void Save(string path, System.Drawing.Imaging.ImageFormat format)
         {
-            _bitmap.Save(path, format);
+            try
+            {
+                _bitmap.Save(path, format);
+            }
+            catch(Exception ex)
+            {
+                throw new IOException("Could not save image");
+            }
+            
         }
     }
 }

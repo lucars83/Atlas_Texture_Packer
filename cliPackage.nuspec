@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!-- Do not remove this test for UTF-8: if “Ω” doesn’t appear as greek uppercase omega letter enclosed in quotation marks, you should use an editor that supports UTF-8, not this one. -->
+<package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
+  <metadata>
+    <!-- Read this before publishing packages to chocolatey.org: https://github.com/chocolatey/chocolatey/wiki/CreatePackages -->
+    <id>AtlasTexturePackerCLI</id>
+    <title>Atlas Texture Packer CLI</title>
+    <version>0.0.0</version>
+    <authors>Lucas Lundy</authors>
+    <owners>Lucad Lundy</owners>
+    <summary>Atlas Texture Packer CLI</summary>
+    <description> Packs images into a texture atlas and optionaly crestes a description file in various formats
+    </description>
+    <tags>texture atlas packer</tags>
+    <copyright>2016</copyright>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <!--<iconUrl>http://cdn.rawgit.com/__REPLACE_YOUR_REPO__/master/icons/blueshift.png</iconUrl>-->
+    <releaseNotes></releaseNotes>
+  </metadata>
+  <files>
+    <file src="build\cli\**" target="lib" />
+  </files>
+</package>
