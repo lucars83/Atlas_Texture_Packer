@@ -228,8 +228,6 @@ namespace AtlasTexturePacker.Library
             public AtlasDescriptor[] uvRects;
         }
 
-      
-
         public static void SaveAtlas(Atlas atlas, string directory, string name)
         {
             if (atlas == null || atlas.texture == null)
@@ -325,7 +323,7 @@ namespace AtlasTexturePacker.Library
         
         	
 
-        public static void QuickCreate(string inputDir, string outputDir, int maxSize = 1024, bool recursive = true)
+        public static void QuickCreate(string inputDir, string outputDir, int maxSize = 1024, bool recursive = true, AtlasFormat format = AtlasFormat.NONE)
         {
         	string[] images = Directory.GetFiles( inputDir ).Where(x => Regex.IsMatch(x.ToLower(), ImageRegex)).ToArray();
         	
@@ -356,7 +354,7 @@ namespace AtlasTexturePacker.Library
 
                 // create descriptor
                 AtlasCreator.SaveAtlas(atlases[i], outputDir, sheetName);
-                SaveAtlasFile(atlasesWithNames, outputDir, AtlasFormat.LIBGDX);
+                SaveAtlasFile(atlasesWithNames, outputDir, format);
             }
         }
         

@@ -8,10 +8,10 @@
     <version>0.0.0</version>
     <authors>Lucas Lundy</authors>
     <owners>Lucad Lundy</owners>
-    <summary>All Custodians CLI</summary>
+    <summary>Atlad Texture Packer Library</summary>
     <description> Packs images into a texture atlas and optionaly crestes a description file in various formats
     </description>
-    <tags>deduplication all other custodian path</tags>
+    <tags>atlas texture packer library</tags>
     <copyright>2016</copyright>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <!--<iconUrl>http://cdn.rawgit.com/__REPLACE_YOUR_REPO__/master/icons/blueshift.png</iconUrl>-->

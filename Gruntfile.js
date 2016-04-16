@@ -91,11 +91,17 @@ module.exports = function(grunt) {
 
     //FIXME: until Nuget 3.0 is released and can be used, semver 2.0 prerelease strings are not fully supported
     nugetpack: {
-      main: {
+      lib: {
         options: { version: pkg.version },
-        src: 'package.nuspec',
+        src: 'libPackage.nuspec',
         dest: './'
-      }
+      },
+	  cli: {
+		  options:{ version: pkg.version},
+		  src: 'cliPackage.nuspec',
+		  dest: './'
+	  }
+	  
     }
   });
 
@@ -112,10 +118,38 @@ module.exports = function(grunt) {
   grunt.registerTask('build:dev', ['clean:all', 'set:version', 'nugetrestore', 'msbuild:dev', 'copy:cliDev', 'copy:libDev']);
   grunt.registerTask('build:rel', ['clean:all', 'set:version', 'nugetrestore', 'msbuild:rel', 'copy:cliRel', 'copy:libRel']);
   grunt.registerTask('build', ['build:dev']);
-  grunt.registerTask('pack:dev', ['clean:pack', 'nugetpack:main']);
-  grunt.registerTask('pack:rel', ['clean:pack', 'nugetpack:main']);
+  grunt.registerTask('pack:dev', ['clean:pack', 'nugetpack:lib', 'nugetpack:cli']);
+  grunt.registerTask('pack:rel', ['clean:pack', 'nugetpack:lib', 'nugetpack:cli']);
   grunt.registerTask('pack', ['pack:dev']);
   grunt.registerTask('dev', ['build:dev', 'pack:dev']);
   grunt.registerTask('rel', ['build:rel', 'pack:rel']);
   grunt.registerTask('default', ['dev']);
+  grunt.registerTask('relnnr', ['clean:all', 'set:version', 'msbuild:rel', 'copy:cliRel', 'copy:libRel']);
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 };

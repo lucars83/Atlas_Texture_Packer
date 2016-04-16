@@ -9,6 +9,7 @@ namespace AtlasTexturePacker.Library
     {
         public enum AtlasFormat
         {
+            NONE,
             LIBGDX
         }
 
@@ -16,6 +17,7 @@ namespace AtlasTexturePacker.Library
         {
             switch (format)
             {
+                case AtlasFormat.NONE: break;
                 case AtlasFormat.LIBGDX: SaveLibgdxFile(atlases, path); break;
             }
         }
