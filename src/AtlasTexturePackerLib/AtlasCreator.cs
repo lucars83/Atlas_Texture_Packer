@@ -187,12 +187,13 @@ namespace AtlasTexturePacker.Library
                 if (imageRef != null)
                 {
                     
-                    Color[] data = imageRef.GetPixels();
+                    PixelMap data = imageRef.GetPixels();
                     for (int x = 0; x < imageRef.Width; ++x)
                     {
                         for (int y = 0; y < imageRef.Height; ++y)
                         {
-                            target.SetPixel(x + (int)rc.X, y + (int)rc.Y, data[x + y * imageRef.Width]);
+                            //target.SetPixel(x + (int)rc.X, y + (int)rc.Y, data[x + y]);// * imageRef.Width]);
+                            target.SetPixel(x + (int)rc.X, y + (int)rc.Y, data.GetPixel(x, y));
                         }
                     }
                     // Artificial texture bleeding!
@@ -201,12 +202,12 @@ namespace AtlasTexturePacker.Library
                         for (int y = 0; y < imageRef.Height; ++y)
                         {
                             int x = imageRef.Width - 1;
-                            target.SetPixel(x + (int)rc.X + TEXTURE_PADDING, y + (int)rc.Y, data[x + y * imageRef.Width]);
+                            target.SetPixel(x + (int)rc.X + TEXTURE_PADDING, y + (int)rc.Y, data.GetPixel(x, y));
                         }
                         for (int x = 0; x < imageRef.Width; ++x)
                         {
                             int y = imageRef.Height - 1;
-                            target.SetPixel(x + (int)rc.X, y + (int)rc.Y + TEXTURE_PADDING, data[x + y * imageRef.Width]);
+                            target.SetPixel(x + (int)rc.X, y + (int)rc.Y + TEXTURE_PADDING, data.GetPixel(x, y));
                         }
                     }
                 }
@@ -241,8 +242,8 @@ namespace AtlasTexturePacker.Library
         public static Atlas[] CreateAtlas(string name, BitmapExtended[] textures, Atlas startWith = null)
         {
             // Rotate images
-            for (int i = 0; i < textures.Length; ++i)
-                textures[i].RotateFlip(RotateFlipType.Rotate90FlipNone);
+            //for (int i = 0; i < textures.Length; ++i)
+            //    textures[i].RotateFlip(RotateFlipType.Rotate90FlipNone);
 
             List<BitmapExtended> toProcess = new List<BitmapExtended>();
             toProcess.AddRange(textures);
