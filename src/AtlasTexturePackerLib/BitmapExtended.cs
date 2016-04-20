@@ -48,26 +48,26 @@ namespace AtlasTexturePacker.Library
             _bitmap = new Bitmap(width, height);
         }
 
-        public Color[] GetPixels()
+        public PixelMap GetPixels()
         {
-            List<Color> pixels = new List<Color>();
+            PixelMap map = new PixelMap(_bitmap.Width, _bitmap.Height);
 
-            for (int x = _bitmap.Height - 1; x >= 0; --x)
+            for(int x = 0; x < _bitmap.Width; ++x) //(int x = _bitmap.Width - 1; x >= 0; --x)
             {
-                for (int y = 0; y < _bitmap.Width; ++y)
+                for (int y = 0; y < _bitmap.Height; ++y)
                 {
-                    pixels.Add(_bitmap.GetPixel(x, y));
+                    map.SetPixel(x, y, _bitmap.GetPixel(x, y));
                 }
             }
 
-            return pixels.ToArray();
+            return map;
         }
-
+        /*
         public void RotateFlip(RotateFlipType rotation)
         {
             _bitmap.RotateFlip(rotation);
         }
-
+        */
         public void SetPixel(int x, int y, Color color)
         {
             _bitmap.SetPixel(x, y, color);
